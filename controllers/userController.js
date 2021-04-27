@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const { generateToken } = require('../utils/token');
 
 const registration = async (req, res) => {
-  const { login, password, isAdmin } = req.body;
+  const { login, password, role, avatar } = req.body;
 
   try {
     const candidate = await db.User.findOne({ where: { login } });
@@ -17,12 +17,13 @@ const registration = async (req, res) => {
     const user = await db.User.create({
       login,
       password: hashPassword,
-      isAdmin,
+      role,
+      avatar,
     });
 
     const token = generateToken(user.id);
 
-    return res.json(token);
+    return res.json(token, user);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
@@ -43,12 +44,12 @@ const login = async (req, res) => {
   }
   const token = generateToken(user.id);
 
-  return res.json(token);
+  return res.json(token, user);
 };
 
 const check = async (req, res) => {
   const token = generateToken(req.user.id);
-  return res.json(token);
+  return res.json(token, user);
 };
 
 const getUsers = async (req, res) => {
@@ -56,9 +57,10 @@ const getUsers = async (req, res) => {
     const users = await db.User.findAll({
       include: [
         {
-          model: db.Film,
-          // as: 'film',
-          attributes: ['poster', 'name', 'description', 'stars'],
+          model: db.Comment,
+          model: db.Rating,
+          model: db.Orders,
+
           through: {
             attributes: [],
           },

@@ -22,7 +22,7 @@ const changeCategory = async (req, res) => {
   try {
     const genreId = await db.Category.findOne({ where: { id } });
     if (!genreId) {
-      return res.json({ message: 'Жанр с этим id не найден' });
+      return res.json({ message: 'Категория с этим id не найдена' });
     }
 
     await db.Category.update(
@@ -45,7 +45,7 @@ const deleteCategory = async (req, res) => {
   try {
     const genreId = await db.Category.findOne({ where: { id } });
     if (!genreId) {
-      return res.json({ message: 'Жанр с этим id не найден' });
+      return res.json({ message: 'Категория с этим id не найдена' });
     }
 
     await db.Category.destroy({ where: { id } });
@@ -61,7 +61,7 @@ const findCategory = async (req, res) => {
   try {
     const category = await db.Category.findAll({
       include: {
-        model: db.Film,
+        model: db.Book,
         attributes: ['name'],
       },
     });
@@ -87,7 +87,7 @@ const findOneCategory = async (req, res) => {
 
     const category = await db.Category.findOne({
       where: { id },
-      include: db.Film,
+      include: db.Book,
     });
 
     return res.json(category);
