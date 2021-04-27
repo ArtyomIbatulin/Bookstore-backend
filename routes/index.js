@@ -28,6 +28,8 @@ router.get('/api/v1/findComment/:id', commentController.findComment);
 router.delete('/api/v1/findComment/:id', commentController.deleteComment);
 router.put('/api/v1/putComment/:id', commentController.putComment);
 
+// user-rating
+// показывает 1 категорию на книге ...
 router.post('/api/v1/createRating', ratingController.createRating);
 router.get('/api/v1/findRating', ratingController.findRatings);
 router.get('/api/v1/findRating/:id', ratingController.findRating);
