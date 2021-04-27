@@ -16,14 +16,14 @@ module.exports = (sequelize, DataTypes) => {
     {
       text: {
         type: DataTypes.STRING,
-        allowNull: false,
+        // allowNull: false,
       },
       date: {
         type: DataTypes.DATE,
-        allowNull: false,
-        validate: {
-          isDate: true,
-        },
+        // allowNull: false,
+        // validate: {
+        //   isDate: true,
+        // },
       },
     },
     {

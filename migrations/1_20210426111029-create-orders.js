@@ -10,14 +10,14 @@ module.exports = {
       },
       amount: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        validate: {
-          isNumeric: true,
-        },
+        // allowNull: false,
+        // validate: {
+        //   isNumeric: true,
+        // },
       },
       status: {
         type: Sequelize.STRING,
-        allowNull: false,
+        // allowNull: false,
       },
       createdAt: {
         allowNull: false,

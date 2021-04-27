@@ -10,14 +10,14 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false,
+        // allowNull: false,
       },
       price: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        validate: {
-          isNumeric: true,
-        },
+        // allowNull: false,
+        // validate: {
+        //   isNumeric: true,
+        // },
       },
       description: {
         type: Sequelize.STRING,
@@ -36,7 +36,7 @@ module.exports = {
           model: 'Comments',
           key: 'id',
         },
-        allowNull: false,
+        // allowNull: false,
       },
       // rating: {
       //   type: Sequelize.INTEGER,

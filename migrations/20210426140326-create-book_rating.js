@@ -14,7 +14,7 @@ module.exports = {
           model: 'Books',
           key: 'id',
         },
-        allowNull: false,
+        // allowNull: false,
       },
       RatingId: {
         type: Sequelize.INTEGER,
@@ -22,7 +22,7 @@ module.exports = {
           model: 'Ratings',
           key: 'id',
         },
-        allowNull: false,
+        // allowNull: false,
       },
       createdAt: {
         allowNull: false,

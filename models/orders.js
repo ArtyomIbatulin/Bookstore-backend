@@ -26,14 +26,14 @@ module.exports = (sequelize, DataTypes) => {
       // },
       amount: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        validate: {
-          isNumeric: true,
-        },
+        // allowNull: false,
+        // validate: {
+        //   isNumeric: true,
+        // },
       },
       status: {
         type: DataTypes.STRING,
-        allowNull: false,
+        // allowNull: false,
       },
     },
     {

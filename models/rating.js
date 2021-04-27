@@ -15,12 +15,12 @@ module.exports = (sequelize, DataTypes) => {
     {
       rate: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        validate: {
-          isNumeric: true,
-          min: 0,
-          max: 5,
-        },
+        // allowNull: false,
+        // validate: {
+        //   isNumeric: true,
+        //   min: 0,
+        //   max: 5,
+        // },
       },
     },
     {

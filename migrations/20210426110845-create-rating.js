@@ -10,12 +10,12 @@ module.exports = {
       },
       rate: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        validate: {
-          isNumeric: true,
-          min: 0,
-          max: 5,
-        },
+        // allowNull: false,
+        // validate: {
+        //   isNumeric: true,
+        //   min: 0,
+        //   max: 5,
+        // },
       },
       createdAt: {
         allowNull: false,

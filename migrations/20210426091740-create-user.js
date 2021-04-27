@@ -11,12 +11,12 @@ module.exports = {
 
       login: {
         type: Sequelize.STRING,
-        allowNull: false,
-        validate: { unique: true, len: [2, 16] },
+        // allowNull: false,
+        // validate: { unique: true, len: [2, 16] },
       },
       password: {
         type: Sequelize.STRING,
-        allowNull: false,
+        // allowNull: false,
       },
       role: {
         type: Sequelize.ENUM('admin', 'user'),
@@ -31,7 +31,7 @@ module.exports = {
           model: 'Comments',
           key: 'id',
         },
-        allowNull: false,
+        // allowNull: false,
       },
       Orders: {
         type: Sequelize.STRING,
@@ -40,7 +40,7 @@ module.exports = {
           key: 'id',
         },
         onDelete: 'CASCADE',
-        allowNull: false,
+        // allowNull: false,
       },
 
       createdAt: {
