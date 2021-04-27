@@ -7,11 +7,29 @@ const healthController = require('../controllers/healthController');
 
 router.get('/api/v1/health', healthController.health);
 
-router.post('/api/v1/create', filmController.createFilm);
-router.get('/api/v1/find', filmController.findFilms);
-router.get('/api/v1/find/:id', filmController.findFilm);
-router.delete('/api/v1/find/:id', filmController.deleteFilm);
-router.put('/api/v1/put/:id', filmController.putFilm);
+router.post('/api/v1/createAuthor', filmController.createAuthor);
+router.get('/api/v1/findAuthor', filmController.findAuthors);
+router.get('/api/v1/findAuthor/:id', filmController.findAuthor);
+router.delete('/api/v1/findAuthor/:id', filmController.deleteAuthor);
+router.put('/api/v1/putAuthor/:id', filmController.putAuthor);
+
+router.post('/api/v1/createBook', filmController.createBook);
+router.get('/api/v1/findBook', filmController.findBooks);
+router.get('/api/v1/findBook/:id', filmController.findBook);
+router.delete('/api/v1/findBook/:id', filmController.deleteBook);
+router.put('/api/v1/putBook/:id', filmController.putBook);
+
+router.post('/api/v1/createComment', filmController.createComment);
+router.get('/api/v1/findComment', filmController.findComments);
+router.get('/api/v1/findComment/:id', filmController.findComment);
+router.delete('/api/v1/findComment/:id', filmController.deleteComment);
+router.put('/api/v1/putComment/:id', filmController.putComment);
+
+router.post('/api/v1/createRating', filmController.createRating);
+router.get('/api/v1/findRating', filmController.findRatings);
+router.get('/api/v1/findRating/:id', filmController.findRating);
+router.delete('/api/v1/findRating/:id', filmController.deleteRating);
+router.put('/api/v1/putRating/:id', filmController.putRating);
 
 router.post('/api/v1/sign-up', userController.registration);
 router.post('/api/v1/sign-in', userController.login);
