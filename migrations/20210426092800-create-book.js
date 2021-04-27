@@ -31,7 +31,7 @@ module.exports = {
       //   allowNull: false,
       // },
       Comments: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         references: {
           model: 'Comments',
           key: 'id',
