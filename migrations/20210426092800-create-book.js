@@ -30,14 +30,14 @@ module.exports = {
       //   type: Sequelize.STRING,
       //   allowNull: false,
       // },
-      Comments: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Comments',
-          key: 'id',
-        },
-        // allowNull: false,
-      },
+      // Comments: {
+      //   type: Sequelize.INTEGER,
+      //   references: {
+      //     model: 'Comments',
+      //     key: 'id',
+      //   },
+      //   allowNull: false,
+      // },
       // rating: {
       //   type: Sequelize.INTEGER,
       //   allowNull: false,
