@@ -19,6 +19,7 @@ router.put('/api/v1/change-author/:id', authorController.putAuthor);
 
 router.post('/api/v1/create-book', bookController.createBook);
 router.get('/api/v1/get-book', bookController.findBooks);
+router.get('/api/v1/pag-example', bookController.paginExampBooks);
 router.get('/api/v1/find-book/:id', bookController.findBook);
 router.delete('/api/v1/find-book/:id', bookController.deleteBook);
 router.put('/api/v1/change-book/:id', bookController.putBook);
@@ -29,7 +30,6 @@ router.get('/api/v1/find-comment/:id', commentController.findComment);
 router.delete('/api/v1/find-comment/:id', commentController.deleteComment);
 router.put('/api/v1/change-comment/:id', commentController.putComment);
 
-// orders
 // seq pagination
 // videos
 router.post('/api/v1/create-rating', ratingController.createRating);

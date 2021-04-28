@@ -66,6 +66,22 @@ const findBooks = async (req, res) => {
   }
 };
 
+const paginExampBooks = async (req, res) => {
+  try {
+    const books = await db.Book.findAndCountAll({
+      limit: 2,
+      offset: 3,
+      // attributes: { exclude: ['category'] },
+      include: [db.Author, db.Category, db.Rating],
+    });
+
+    return res.json(books);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+};
+
 const findBook = async (req, res) => {
   const id = req.params.id;
 
@@ -117,4 +133,5 @@ module.exports = {
   findBooks,
   findBook,
   putBook,
+  paginExampBooks,
 };
