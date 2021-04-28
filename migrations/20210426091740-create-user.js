@@ -25,24 +25,6 @@ module.exports = {
       avatar: {
         type: Sequelize.STRING,
       },
-      // Comments: {
-      //   type: Sequelize.INTEGER,
-      //   references: {
-      //     model: 'Comments',
-      //     key: 'id',
-      //   },
-      //   allowNull: false,
-      // },
-      Orders: {
-        // ???
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Orders',
-          key: 'id',
-        },
-        onDelete: 'CASCADE',
-        // allowNull: false,
-      },
 
       createdAt: {
         allowNull: false,

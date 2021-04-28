@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
         through: 'Book_ratings',
       });
       this.belongsToMany(User, {
-        through: ' User_ratings',
+        through: 'User_ratings',
       });
     }
   }

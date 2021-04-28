@@ -7,6 +7,7 @@ const bookController = require('../controllers/bookController');
 const commentController = require('../controllers/commentController');
 const ratingController = require('../controllers/ratingController');
 const healthController = require('../controllers/healthController');
+const ordersController = require('../controllers/ordersController');
 
 router.get('/api/v1/health', healthController.health);
 
@@ -28,9 +29,7 @@ router.get('/api/v1/find-comment/:id', commentController.findComment);
 router.delete('/api/v1/find-comment/:id', commentController.deleteComment);
 router.put('/api/v1/change-comment/:id', commentController.putComment);
 
-// user-rating
-// показывает 1 категорию на книге ...
-// rating orders
+// orders
 // seq pagination
 // videos
 router.post('/api/v1/create-rating', ratingController.createRating);
@@ -49,5 +48,11 @@ router.put('/api/v1/change-category/:id', categoryController.changeCategory);
 router.delete('/api/v1/del-category/:id', categoryController.deleteCategory);
 router.get('/api/v1/get-category', categoryController.findCategory);
 router.get('/api/v1/find-category/:id', categoryController.findOneCategory);
+
+router.post('/api/v1/create-order', ordersController.createOrder);
+router.get('/api/v1/get-order', ordersController.findOrdersAll);
+router.get('/api/v1/find-order/:id', ordersController.findOrder);
+router.delete('/api/v1/find-order/:id', ordersController.deleteOrder);
+router.put('/api/v1/change-order/:id', ordersController.putOrder);
 
 module.exports = router;

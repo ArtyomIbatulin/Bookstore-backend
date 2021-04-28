@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate({ Comment, Rating, Orders }) {
       this.hasMany(Comment);
       this.belongsToMany(Rating, {
-        through: ' User_ratings',
+        through: 'User_ratings',
       });
       this.hasOne(Orders);
     }

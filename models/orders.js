@@ -16,14 +16,6 @@ module.exports = (sequelize, DataTypes) => {
   }
   Orders.init(
     {
-      // userId: {
-      //   type: DataTypes.STRING,
-      //   allowNull: false,
-      // },
-      // bookId: {
-      //   type: DataTypes.STRING,
-      //   allowNull: false,
-      // },
       amount: {
         type: DataTypes.INTEGER,
         // allowNull: false,

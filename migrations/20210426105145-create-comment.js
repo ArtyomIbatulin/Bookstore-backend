@@ -35,7 +35,6 @@ module.exports = {
         },
         // allowNull: false,
       },
-      // вывод в юзере и книге через include
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
