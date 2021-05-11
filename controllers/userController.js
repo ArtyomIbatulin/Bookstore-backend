@@ -9,7 +9,7 @@ const registration = async (req, res) => {
     const candidate = await db.User.findOne({ where: { login } });
 
     if (candidate) {
-      return res.json({ message: 'Такой логин уже существует' });
+      return res.status(400).json({ message: 'Такой логин уже существует' });
     }
 
     const hashPassword = await bcrypt.hash(password, 5);
@@ -23,7 +23,7 @@ const registration = async (req, res) => {
 
     const token = generateToken(user.id);
 
-    return res.json(user);
+    return res.status(201).json(user);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
@@ -34,13 +34,13 @@ const login = async (req, res) => {
   const { login, password } = req.body;
   const user = await db.User.findOne({ where: { login } });
   if (!user) {
-    return res.json({ message: 'Пользователь не найден' });
+    return res.status(400).json({ message: 'Пользователь не найден' });
   }
 
-  let comparePassword = bcrypt.compareSync(password, user.password);
+  let comparePassword = await bcrypt.compare(password, user.password);
 
   if (!comparePassword) {
-    return res.json({ message: 'Пароль неверен' });
+    return res.status(400).json({ message: 'Пароль неверен' });
   }
   const token = generateToken(user.id);
 
