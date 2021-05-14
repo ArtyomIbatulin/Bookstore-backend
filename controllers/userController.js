@@ -6,6 +6,9 @@ const registration = async (req, res) => {
   const { login, password, role, avatar } = req.body;
 
   try {
+    // настроить cors !!!
+    console.log('Body', req.body);
+
     const candidate = await db.User.findOne({ where: { login } });
 
     if (candidate) {
