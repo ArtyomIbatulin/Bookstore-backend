@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "fusion",
-    "password": "fusion",
-    "database": "bookstore",
+    "username": "postgres",
+    "password": "psgxarsber",
+    "database": "bookstorehome",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
