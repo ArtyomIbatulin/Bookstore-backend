@@ -6,9 +6,13 @@ const bodyParser = require("body-parser");
 require("./db");
 const routes = require("./routes");
 const PORT = process.env.PORT || 4000;
-
+const corsOptions = {
+  origin: "http://localhost:3000",
+  credentials: true,
+};
 const app = express();
-app.use(cors()); // options
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
