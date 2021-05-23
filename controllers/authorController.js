@@ -1,4 +1,4 @@
-const db = require('../models');
+const db = require("../models");
 
 const createAuthor = async (req, res) => {
   const { name } = req.body;
@@ -8,7 +8,7 @@ const createAuthor = async (req, res) => {
       name,
     });
 
-    return res.json(author);
+    return res.status(201).json(author);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
@@ -21,12 +21,12 @@ const deleteAuthor = async (req, res) => {
   try {
     const authorId = await db.Author.findOne({ where: { id } });
     if (!authorId) {
-      return res.json({ message: 'Автор с этим id не найден' });
+      return res.json({ message: "Автор с этим id не найден" });
     }
 
     await db.Author.destroy({ where: { id } });
 
-    return res.json({ message: 'Автор успешно удален' });
+    return res.json({ message: "Автор успешно удален" });
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
@@ -54,7 +54,7 @@ const findAuthor = async (req, res) => {
     const authorId = await db.Author.findOne({ where: { id } });
 
     if (!authorId) {
-      return res.json({ message: 'Автор с этим id не найден' });
+      return res.json({ message: "Автор с этим id не найден" });
     }
 
     const author = await db.Author.findOne({ where: { id } });
@@ -73,7 +73,7 @@ const putAuthor = async (req, res) => {
   try {
     const authorId = await db.Author.findOne({ where: { id } });
     if (!authorId) {
-      return res.json({ message: 'Автор с этим id не найден' });
+      return res.json({ message: "Автор с этим id не найден" });
     }
 
     await db.Author.update(
@@ -83,7 +83,7 @@ const putAuthor = async (req, res) => {
       { where: { id } }
     );
 
-    return res.json({ message: 'Автор изменен' });
+    return res.json({ message: "Автор изменен" });
   } catch (error) {
     console.log(error);
     res.status(500).json(error);

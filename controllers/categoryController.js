@@ -1,4 +1,4 @@
-const db = require('../models');
+const db = require("../models");
 
 const createCategory = async (req, res) => {
   const { name } = req.body;
@@ -8,7 +8,7 @@ const createCategory = async (req, res) => {
       name,
     });
 
-    return res.json(category);
+    return res.status(201).json(category);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
@@ -22,7 +22,7 @@ const changeCategory = async (req, res) => {
   try {
     const genreId = await db.Category.findOne({ where: { id } });
     if (!genreId) {
-      return res.json({ message: 'Категория с этим id не найдена' });
+      return res.json({ message: "Категория с этим id не найдена" });
     }
 
     await db.Category.update(
@@ -32,7 +32,7 @@ const changeCategory = async (req, res) => {
       { where: { id } }
     );
 
-    return res.json({ message: 'Категория изменена' });
+    return res.json({ message: "Категория изменена" });
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
@@ -45,12 +45,12 @@ const deleteCategory = async (req, res) => {
   try {
     const genreId = await db.Category.findOne({ where: { id } });
     if (!genreId) {
-      return res.json({ message: 'Категория с этим id не найдена' });
+      return res.json({ message: "Категория с этим id не найдена" });
     }
 
     await db.Category.destroy({ where: { id } });
 
-    return res.json({ message: 'Категория успешно удалена' });
+    return res.json({ message: "Категория успешно удалена" });
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
@@ -62,7 +62,7 @@ const findCategory = async (req, res) => {
     const category = await db.Category.findAll({
       include: {
         model: db.Book,
-        attributes: ['name'],
+        attributes: ["name"],
       },
     });
 
@@ -82,7 +82,7 @@ const findOneCategory = async (req, res) => {
     });
 
     if (!categoryId) {
-      return res.json({ message: 'Категория с этим id не найдена' });
+      return res.json({ message: "Категория с этим id не найдена" });
     }
 
     const category = await db.Category.findOne({

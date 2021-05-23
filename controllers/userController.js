@@ -1,18 +1,17 @@
-const db = require('../models');
-const bcrypt = require('bcrypt');
-const { generateToken } = require('../utils/token');
+const db = require("../models");
+const bcrypt = require("bcrypt");
+const { generateToken } = require("../utils/token");
 
 const registration = async (req, res) => {
-  const { login, password, role, avatar } = req.body;
+  const { login, password, role } = req.body;
 
   try {
-    // настроить cors !!!
-    console.log('Body', req.body);
+    console.log("Body", req.body);
 
     const candidate = await db.User.findOne({ where: { login } });
 
     if (candidate) {
-      return res.status(400).json({ message: 'Такой логин уже существует' });
+      return res.status(400).json({ message: "Такой логин уже существует" });
     }
 
     const hashPassword = await bcrypt.hash(password, 5);
@@ -21,7 +20,6 @@ const registration = async (req, res) => {
       login,
       password: hashPassword,
       role,
-      avatar,
     });
 
     const token = generateToken(user.id);
@@ -37,13 +35,13 @@ const login = async (req, res) => {
   const { login, password } = req.body;
   const user = await db.User.findOne({ where: { login } });
   if (!user) {
-    return res.status(400).json({ message: 'Пользователь не найден' });
+    return res.status(400).json({ message: "Пользователь не найден" });
   }
 
   let comparePassword = await bcrypt.compare(password, user.password);
 
   if (!comparePassword) {
-    return res.status(400).json({ message: 'Пароль неверен' });
+    return res.status(400).json({ message: "Пароль неверен" });
   }
   const token = generateToken(user.id);
 

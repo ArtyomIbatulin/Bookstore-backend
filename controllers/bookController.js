@@ -1,6 +1,9 @@
-const db = require('../models');
+const db = require("../models");
 const Book = db.Book;
+const bc = db.Book_category;
 const Op = db.Sequelize.Op;
+const uuid = require("uuid");
+const path = require("path");
 
 const getPagination = (page, size) => {
   const limit = size ? +size : 3;
@@ -28,7 +31,7 @@ const pagBookfindAll = (req, res) => {
     limit,
     offset,
     include: [db.Author, db.Category, db.Rating],
-    order: ['id'],
+    order: ["id"],
   })
     .then((data) => {
       const response = getPagingData(data, page, limit);
@@ -36,7 +39,7 @@ const pagBookfindAll = (req, res) => {
     })
     .catch((err) => {
       res.status(500).json({
-        message: err.message || 'Some error occurred while retrieving books.',
+        message: err.message || "Some error occurred while retrieving books.",
       });
     });
 };
@@ -61,15 +64,19 @@ const pagBookfindAll = (req, res) => {
 
 const createBook = async (req, res) => {
   const { name, price, description } = req.body;
+  const { img } = req.files;
+  let fileName = uuid.v4() + ".jpg";
+  img.mv(path.resolve(__dirname, "..", "static", fileName));
 
   try {
     const book = await Book.create({
       name,
       price,
       description,
+      img: fileName,
     });
 
-    return res.json(book);
+    return res.status(201).json(book);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
@@ -82,12 +89,12 @@ const deleteBook = async (req, res) => {
   try {
     const bookId = await Book.findOne({ where: { id } });
     if (!bookId) {
-      return res.json({ message: 'Книга с этим id не найдена' });
+      return res.json({ message: "Книга с этим id не найдена" });
     }
 
     await Book.destroy({ where: { id } });
 
-    return res.json({ message: 'Книга успешно удалена' });
+    return res.json({ message: "Книга успешно удалена" });
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
@@ -95,28 +102,42 @@ const deleteBook = async (req, res) => {
 };
 
 const findBooks = async (req, res) => {
+  // const { AuthorId, CategoryId } = req.query;
+  // let books;
+
   try {
     const books = await Book.findAll({
-      // attributes: { exclude: ['category'] },
-      include: [
-        db.Author,
-        db.Category,
-        db.Rating,
-        // {
-        //   model: db.Category,
-        //   attributes: ['name'],
-        // },
-        // {
-        //   model: db.User,
-        // as: 'users',
-
-        // attributes: ['login', 'isAdmin'],
-        // through: {
-        //   attributes: [],
-        // },
-        // },
-      ],
+      include: [db.Author, db.Category, db.Rating],
     });
+
+    // if ((!AuthorId, !CategoryId)) {
+    //   books = await Book.findAll({
+    //     include: [db.Author, db.Category, db.Rating],
+    //   });
+    // }
+
+    // if ((AuthorId, !CategoryId)) {
+    //   console.log(req.query, AuthorId, CategoryId);
+
+    //   books = await Book.findAll({
+    //     where: {},
+    //     include: [db.Author, db.Category, db.Rating],
+    //   });
+    // }
+
+    // if ((!AuthorId, CategoryId)) {
+    //   books = await Book.findAll({
+    //     where: { CategoryId },
+    //     include: [db.Author, db.Category, db.Rating],
+    //   });
+    // }
+
+    // if ((AuthorId, CategoryId)) {
+    //   books = await Book.findAll({
+    //     where: { AuthorId, CategoryId },
+    //     include: [db.Author, db.Category, db.Rating],
+    //   });
+    // }
 
     return res.json(books);
   } catch (error) {
@@ -132,7 +153,7 @@ const findBook = async (req, res) => {
     const bookId = await Book.findOne({ where: { id } });
 
     if (!bookId) {
-      return res.json({ message: 'Книга с этим id не найдена' });
+      return res.json({ message: "Книга с этим id не найдена" });
     }
 
     const book = await Book.findOne({ where: { id } });
@@ -146,12 +167,12 @@ const findBook = async (req, res) => {
 
 const putBook = async (req, res) => {
   const id = req.params.id;
-  const { name, price, description } = req.body;
+  const { name, price, description, img } = req.body;
 
   try {
     const bookId = await Book.findOne({ where: { id } });
     if (!bookId) {
-      return res.json({ message: 'Книга с этим id не найдена' });
+      return res.json({ message: "Книга с этим id не найдена" });
     }
 
     await Book.update(
@@ -159,11 +180,12 @@ const putBook = async (req, res) => {
         name,
         price,
         description,
+        img,
       },
       { where: { id } }
     );
 
-    return res.json({ message: 'Книга изменена' });
+    return res.json({ message: "Книга изменена" });
   } catch (error) {
     console.log(error);
     res.status(500).json(error);

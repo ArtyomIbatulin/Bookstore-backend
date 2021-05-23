@@ -20,7 +20,7 @@ router.put("/api/v1/change-author/:id", authorController.putAuthor);
 router.post("/api/v1/create-book", bookController.createBook);
 router.get("/api/v1/get-books", bookController.findBooks);
 router.get("/api/v1/get-books-pagin", bookController.pagBookfindAll);
-router.get("/api/v1/get-book/:id", bookController.findBook);
+router.get("/api/v1/book/:id", bookController.findBook); // v1 ? axios.js
 router.delete("/api/v1/find-book/:id", bookController.deleteBook);
 router.put("/api/v1/change-book/:id", bookController.putBook);
 
@@ -54,3 +54,6 @@ router.delete("/api/v1/find-order/:id", ordersController.deleteOrder);
 router.put("/api/v1/change-order/:id", ordersController.putOrder);
 
 module.exports = router;
+
+// pagin in login & pass
+// img в book controller

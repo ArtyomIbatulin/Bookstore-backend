@@ -1,20 +1,20 @@
-'use strict';
-const { Model } = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Book extends Model {
     static associate({ Comment, Category, Author, Rating, Orders }) {
       this.hasMany(Comment);
       this.belongsToMany(Category, {
-        through: 'Book_categories',
+        through: "Book_categories",
       });
       this.belongsToMany(Author, {
-        through: 'Book_authors',
+        through: "Book_authors",
       });
       this.belongsToMany(Rating, {
-        through: 'Book_ratings',
+        through: "Book_ratings",
       });
       this.belongsToMany(Orders, {
-        through: 'Orders_books',
+        through: "Orders_books",
       });
     }
   }
@@ -34,27 +34,13 @@ module.exports = (sequelize, DataTypes) => {
       description: {
         type: DataTypes.STRING,
       },
-      // author: {
-      //   type: DataTypes.STRING,
-      //   allowNull: false,
-      // },
-      // category: {
-      //   type: DataTypes.STRING,
-      //   allowNull: false,
-      // },
-      // rating: {
-      //   type: DataTypes.INTEGER,
-      //   allowNull: false,
-      //   validate: {
-      //     isNumeric: true,
-      //     min: 0,
-      //     max: 5,
-      //   },
-      // },
+      img: {
+        type: DataTypes.STRING,
+      },
     },
     {
       sequelize,
-      modelName: 'Book',
+      modelName: "Book",
     }
   );
   return Book;
