@@ -105,25 +105,22 @@ const deleteBook = async (req, res) => {
 
 const findBooks = async (req, res) => {
   const { AuthorId, CategoryId } = req.query;
-  const id = req.params.id;
   let books;
 
   try {
-    if ((!AuthorId, !CategoryId)) {
+    if (!AuthorId && !CategoryId) {
       books = await Book.findAll({
         include: [Author, Category, Rating],
       });
     }
 
-    if ((AuthorId, !CategoryId)) {
-      console.log(id);
+    if (AuthorId && !CategoryId) {
       books = await Book.findAll({
         include: [{ model: Author, where: { id: AuthorId } }, Category, Rating],
       });
     }
 
-    if ((!AuthorId, CategoryId)) {
-      console.log(id);
+    if (!AuthorId && CategoryId) {
       books = await Book.findAll({
         include: [
           { model: Category, where: { id: CategoryId } },
@@ -133,8 +130,7 @@ const findBooks = async (req, res) => {
       });
     }
 
-    if ((AuthorId, CategoryId)) {
-      console.log(id);
+    if (AuthorId && CategoryId) {
       books = await Book.findAll({
         include: [
           { model: Author, where: { id: AuthorId } },
