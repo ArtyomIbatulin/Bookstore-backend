@@ -1,6 +1,8 @@
 const db = require("../models");
 const Book = db.Book;
-const bc = db.Book_category;
+const Author = db.Author;
+const Category = db.Category;
+const Rating = db.Rating;
 const Op = db.Sequelize.Op;
 const uuid = require("uuid");
 const path = require("path");
@@ -102,42 +104,45 @@ const deleteBook = async (req, res) => {
 };
 
 const findBooks = async (req, res) => {
-  // const { AuthorId, CategoryId } = req.query;
-  // let books;
+  const { AuthorId, CategoryId } = req.query;
+  const id = req.params.id;
+  let books;
 
   try {
-    const books = await Book.findAll({
-      include: [db.Author, db.Category, db.Rating],
-    });
+    if ((!AuthorId, !CategoryId)) {
+      books = await Book.findAll({
+        include: [Author, Category, Rating],
+      });
+    }
 
-    // if ((!AuthorId, !CategoryId)) {
-    //   books = await Book.findAll({
-    //     include: [db.Author, db.Category, db.Rating],
-    //   });
-    // }
+    if ((AuthorId, !CategoryId)) {
+      console.log(id);
+      books = await Book.findAll({
+        include: [{ model: Author, where: { id: AuthorId } }, Category, Rating],
+      });
+    }
 
-    // if ((AuthorId, !CategoryId)) {
-    //   console.log(req.query, AuthorId, CategoryId);
+    if ((!AuthorId, CategoryId)) {
+      console.log(id);
+      books = await Book.findAll({
+        include: [
+          { model: Category, where: { id: CategoryId } },
+          Author,
+          Rating,
+        ],
+      });
+    }
 
-    //   books = await Book.findAll({
-    //     where: {},
-    //     include: [db.Author, db.Category, db.Rating],
-    //   });
-    // }
-
-    // if ((!AuthorId, CategoryId)) {
-    //   books = await Book.findAll({
-    //     where: { CategoryId },
-    //     include: [db.Author, db.Category, db.Rating],
-    //   });
-    // }
-
-    // if ((AuthorId, CategoryId)) {
-    //   books = await Book.findAll({
-    //     where: { AuthorId, CategoryId },
-    //     include: [db.Author, db.Category, db.Rating],
-    //   });
-    // }
+    if ((AuthorId, CategoryId)) {
+      console.log(id);
+      books = await Book.findAll({
+        include: [
+          { model: Author, where: { id: AuthorId } },
+          { model: Category, where: { id: CategoryId } },
+          Rating,
+        ],
+      });
+    }
 
     return res.json(books);
   } catch (error) {
