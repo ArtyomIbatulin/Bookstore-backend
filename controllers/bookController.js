@@ -3,48 +3,48 @@ const Book = db.Book;
 const Author = db.Author;
 const Category = db.Category;
 const Rating = db.Rating;
-const Op = db.Sequelize.Op;
+// const Op = db.Sequelize.Op;
 const uuid = require("uuid");
 const path = require("path");
 
-const getPagination = (page, size) => {
-  const limit = size ? +size : 3;
-  const offset = page ? page * limit : 0;
+// const getPagination = (page, size) => {
+//   const limit = size ? +size : 3;
+//   const offset = page ? page * limit : 0;
 
-  return { limit, offset };
-};
+//   return { limit, offset };
+// };
 
-const getPagingData = (data, page, limit) => {
-  const { count: totalItems, rows: books } = data;
-  const currentPage = page ? +page : 0;
-  const totalPages = Math.ceil(totalItems / limit);
+// const getPagingData = (data, page, limit) => {
+//   const { count: totalItems, rows: books } = data;
+//   const currentPage = page ? +page : 0;
+//   const totalPages = Math.ceil(totalItems / limit);
 
-  return { totalItems, books, totalPages, currentPage };
-};
+//   return { totalItems, books, totalPages, currentPage };
+// };
 
-const pagBookfindAll = (req, res) => {
-  const { page, size, title } = req.query;
-  let condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+// const pagBookfindAll = (req, res) => {
+//   const { page, size, title } = req.query;
+//   let condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
 
-  const { limit, offset } = getPagination(page, size);
+//   const { limit, offset } = getPagination(page, size);
 
-  Book.findAndCountAll({
-    where: condition,
-    limit,
-    offset,
-    include: [db.Author, db.Category, db.Rating],
-    order: ["id"],
-  })
-    .then((data) => {
-      const response = getPagingData(data, page, limit);
-      res.json(response);
-    })
-    .catch((err) => {
-      res.status(500).json({
-        message: err.message || "Some error occurred while retrieving books.",
-      });
-    });
-};
+//   Book.findAndCountAll({
+//     where: condition,
+//     limit,
+//     offset,
+//     include: [db.Author, db.Category, db.Rating],
+//     order: ["id"],
+//   })
+//     .then((data) => {
+//       const response = getPagingData(data, page, limit);
+//       res.json(response);
+//     })
+//     .catch((err) => {
+//       res.status(500).json({
+//         message: err.message || "Some error occurred while retrieving books.",
+//       });
+//     });
+// };
 
 // find all published Book
 // exports.findAllPublished = (req, res) => {
@@ -104,39 +104,50 @@ const deleteBook = async (req, res) => {
 };
 
 const findBooks = async (req, res) => {
-  const { AuthorId, CategoryId } = req.query;
+  let { AuthorId, CategoryId, page, limit } = req.query;
+  page = page || 1;
+  limit = limit || 4;
+  let offset = page * limit - limit;
   let books;
 
   try {
     if (!AuthorId && !CategoryId) {
-      books = await Book.findAll({
+      books = await Book.findAndCountAll({
         include: [Author, Category, Rating],
+        limit,
+        offset,
       });
     }
 
     if (AuthorId && !CategoryId) {
-      books = await Book.findAll({
+      books = await Book.findAndCountAll({
         include: [{ model: Author, where: { id: AuthorId } }, Category, Rating],
+        limit,
+        offset,
       });
     }
 
     if (!AuthorId && CategoryId) {
-      books = await Book.findAll({
+      books = await Book.findAndCountAll({
         include: [
           { model: Category, where: { id: CategoryId } },
           Author,
           Rating,
         ],
+        limit,
+        offset,
       });
     }
 
     if (AuthorId && CategoryId) {
-      books = await Book.findAll({
+      books = await Book.findAndCountAll({
         include: [
           { model: Author, where: { id: AuthorId } },
           { model: Category, where: { id: CategoryId } },
           Rating,
         ],
+        limit,
+        offset,
       });
     }
 
@@ -199,5 +210,5 @@ module.exports = {
   findBooks,
   findBook,
   putBook,
-  pagBookfindAll,
+  // pagBookfindAll,
 };
