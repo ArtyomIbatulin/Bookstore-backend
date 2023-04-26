@@ -23,4 +23,4 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(routes);
 
-app.listen(PORT, () => console.log(`Server has been started on ${PORT}`));
+app.listen(PORT, () => console.log(`Server has started on ${PORT}`));
