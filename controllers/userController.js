@@ -59,11 +59,8 @@ const getUsers = async (req, res) => {
       include: [
         {
           model: db.Comment,
-          // model: db.Rating,
-          // model: db.Orders,
-          // through: {
-          //   attributes: [],
-          // },
+          model: db.Rating,
+          model: db.Orders,
         },
       ],
     });
