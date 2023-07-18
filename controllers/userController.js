@@ -61,6 +61,7 @@ const getUsers = async (req, res) => {
           model: db.Comment,
           model: db.Rating,
           model: db.Orders,
+          //  { model: Category, where: { id: CategoryId } },
         },
       ],
     });
