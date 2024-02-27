@@ -13,15 +13,21 @@ const corsOptions = {
 };
 const path = require("path");
 const app = express();
+const fs = require("fs");
 
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use(express.static(path.resolve(__dirname, "static")));
-app.use(fileUpload({}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.resolve(__dirname, "static")));
+app.use("/uploads", express.static("uploads"));
+app.use(fileUpload({}));
 
 app.use(routes);
+
+if (!fs.existsSync("uploads")) {
+  fs.mkdirSync("uploads");
+}
 
 app.listen(PORT, () => console.log(`Server has started on ${PORT}`));
 
