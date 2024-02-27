@@ -30,6 +30,3 @@ if (!fs.existsSync("uploads")) {
 }
 
 app.listen(PORT, () => console.log(`Server has started on ${PORT}`));
-
-// folder uploads (or static)
-// settings multer
