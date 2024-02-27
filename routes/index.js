@@ -9,6 +9,18 @@ const commentController = require("../controllers/commentController");
 const ratingController = require("../controllers/ratingController");
 const healthController = require("../controllers/healthController");
 const ordersController = require("../controllers/ordersController");
+const multer = require("multer");
+
+const uploadDestination = "uploads";
+
+const storage = multer.diskStorage({
+  destination: uploadDestination,
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+
+const uploads = multer({ storage: storage });
 
 router.get("/api/v1/health", healthController.health);
 
