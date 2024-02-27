@@ -1,5 +1,6 @@
 const db = require("../models");
 const bcrypt = require("bcrypt");
+// может не задеплоиться из-за bcrypt, тогда bcryptjs
 const { generateToken } = require("../utils/token");
 
 const registration = async (req, res) => {

@@ -38,3 +38,5 @@ module.exports = (sequelize, DataTypes) => {
   );
   return User;
 };
+
+// name, avatar, date of birth, location ?
