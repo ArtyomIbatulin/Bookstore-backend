@@ -189,6 +189,7 @@ const putBook = async (req, res) => {
 
     await Book.update(
       {
+        // || undefined
         name,
         price,
         description,

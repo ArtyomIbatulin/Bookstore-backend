@@ -98,13 +98,47 @@ const getUserById = async (req, res) => {
   }
 };
 
+const editUser = async (req, res) => {
+  const id = req.params.id;
+  const { login } = req.body;
+
+  try {
+    const user = await db.User.findOne({ where: { id } });
+    if (!user) {
+      return res.json({ message: "Пользователь не найден" });
+    }
+
+    const existingLogin = await db.User.findOne({ where: { login } });
+
+    // доработать!
+
+    if (existingLogin && user.id !== id) {
+      return res.json({ message: "Такой логин уже занят" });
+    }
+
+    await db.User.update(
+      {
+        login: login || undefined,
+      },
+      { where: { id } }
+    );
+
+    return res.json({ message: "Пользователь изменен" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+};
+
 module.exports = {
   registration,
   login,
   check,
   getUsers,
   getUserById,
+  editUser,
 };
 
 // register, login, getUserById, updateUser, current
 // ulby, sequelize
+// include сделать работающим !!!
