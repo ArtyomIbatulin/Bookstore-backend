@@ -8,6 +8,7 @@ const registration = async (req, res) => {
 
   try {
     console.log("Body", req.body);
+    // проверить не пустые ли поля
 
     const candidate = await db.User.findOne({ where: { login } });
 
@@ -16,6 +17,8 @@ const registration = async (req, res) => {
     }
 
     const hashPassword = await bcrypt.hash(password, 5);
+
+    // сделать рандомную аватарку
 
     const user = await db.User.create({
       login,
@@ -34,6 +37,8 @@ const registration = async (req, res) => {
 
 const login = async (req, res) => {
   const { login, password } = req.body;
+  // проверить наличие полей
+  // try catch
   const user = await db.User.findOne({ where: { login } });
   if (!user) {
     return res.status(400).json({ message: "Пользователь не найден" });
@@ -74,9 +79,32 @@ const getUsers = async (req, res) => {
   }
 };
 
+const getUserById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const user = await db.User.findOne({
+      where: { id },
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: "Пользователь не найден" });
+    }
+
+    return res.json(user);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+};
+
 module.exports = {
   registration,
   login,
   check,
   getUsers,
+  getUserById,
 };
+
+// register, login, getUserById, updateUser, current
+// ulby, sequelize

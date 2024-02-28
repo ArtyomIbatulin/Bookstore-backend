@@ -61,6 +61,7 @@ router.post("/api/v1/sign-up", userController.registration);
 router.post("/api/v1/sign-in", userController.login);
 router.get("/api/v1/auth", authMiddleware, userController.check);
 router.get("/api/v1/get-users", userController.getUsers);
+router.get("/api/v1/user/:id", authMiddleware, userController.getUserById);
 
 router.post(
   "/api/v1/create-category",
