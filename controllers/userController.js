@@ -31,7 +31,7 @@ const registration = async (req, res) => {
     return res.status(201).json(user);
   } catch (error) {
     console.log(error);
-    res.status(500).json(error);
+    return res.status(500).json(error);
   }
 };
 
@@ -75,7 +75,7 @@ const getUsers = async (req, res) => {
     return res.json(users);
   } catch (error) {
     console.log(error);
-    res.status(500).json(error);
+    return res.status(500).json(error);
   }
 };
 
@@ -94,7 +94,7 @@ const getUserById = async (req, res) => {
     return res.json(user);
   } catch (error) {
     console.log(error);
-    res.status(500).json(error);
+    return res.status(500).json(error);
   }
 };
 
@@ -105,7 +105,7 @@ const editUser = async (req, res) => {
   try {
     const user = await db.User.findOne({ where: { id } });
     if (!user) {
-      return res.json({ message: "Пользователь не найден" });
+      return res.status(400).json({ message: "Пользователь не найден" });
     }
 
     const existingLogin = await db.User.findOne({ where: { login } });
@@ -126,7 +126,25 @@ const editUser = async (req, res) => {
     return res.json({ message: "Пользователь изменен" });
   } catch (error) {
     console.log(error);
-    res.status(500).json(error);
+    return res.status(500).json(error);
+  }
+};
+
+const currentUser = async (req, res) => {
+  try {
+    const user = await db.User.findOne({
+      where: { id: req.user.id },
+    });
+    // +include
+
+    if (!user) {
+      return res.status(400).json({ message: "Пользователь не найден" });
+    }
+
+    return res.json(user);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
   }
 };
 
@@ -137,8 +155,10 @@ module.exports = {
   getUsers,
   getUserById,
   editUser,
+  currentUser,
 };
 
 // register, login, getUserById, updateUser, current
 // ulby, sequelize
 // include сделать работающим !!!
+// check ???
