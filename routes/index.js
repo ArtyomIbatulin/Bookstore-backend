@@ -45,11 +45,23 @@ router.get("/api/v1/book/:id", bookController.findBook);
 router.delete("/api/v1/find-book/:id", bookController.deleteBook);
 router.put("/api/v1/change-book/:id", bookController.putBook);
 
-router.post("/api/v1/create-comment", commentController.createComment);
-router.get("/api/v1/get-comments", commentController.findComments);
-router.get("/api/v1/find-comment/:id", commentController.findComment);
-router.delete("/api/v1/find-comment/:id", commentController.deleteComment);
-router.put("/api/v1/change-comment/:id", commentController.putComment);
+router.post(
+  "/api/v1/comments",
+  authMiddleware,
+  commentController.createComment
+);
+router.get("/api/v1/comments", commentController.findAllComments);
+router.get("/api/v1/comments/:id", commentController.findCommentById);
+router.delete(
+  "/api/v1/comments/:id",
+  authMiddleware,
+  commentController.deleteComment
+);
+router.put(
+  "/api/v1/comments/:id",
+  authMiddleware,
+  commentController.putComment
+);
 
 router.post("/api/v1/create-rating", ratingController.createRating);
 router.get("/api/v1/get-ratings", ratingController.findRatings);
