@@ -1,4 +1,4 @@
-const db = require('../models');
+const db = require("../models");
 
 const createComment = async (req, res) => {
   const { text, date } = req.body;
@@ -6,6 +6,7 @@ const createComment = async (req, res) => {
   try {
     const comment = await db.Comment.create({
       text,
+      // автогенерация даты
       date,
     });
 
@@ -22,19 +23,19 @@ const deleteComment = async (req, res) => {
   try {
     const commentId = await db.Comment.findOne({ where: { id } });
     if (!commentId) {
-      return res.json({ message: 'Комментарий с этим id не найден' });
+      return res.json({ message: "Комментарий с этим id не найден" });
     }
 
     await db.Comment.destroy({ where: { id } });
 
-    return res.json({ message: 'Комментарий успешно удален' });
+    return res.json({ message: "Комментарий успешно удален" });
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
   }
 };
 
-const findComments = async (req, res) => {
+const findAllComments = async (req, res) => {
   try {
     const comments = await db.Comment.findAll({
       // attributes: { exclude: ['category'] },
@@ -48,14 +49,14 @@ const findComments = async (req, res) => {
   }
 };
 
-const findComment = async (req, res) => {
+const findCommentById = async (req, res) => {
   const id = req.params.id;
 
   try {
     const commentId = await db.Comment.findOne({ where: { id } });
 
     if (!commentId) {
-      return res.json({ message: 'Комментарий с этим id не найден' });
+      return res.json({ message: "Комментарий с этим id не найден" });
     }
 
     const comment = await db.Comment.findOne({ where: { id } });
@@ -74,7 +75,7 @@ const putComment = async (req, res) => {
   try {
     const commentId = await db.Comment.findOne({ where: { id } });
     if (!commentId) {
-      return res.json({ message: 'Комментарий с этим id не найден' });
+      return res.json({ message: "Комментарий с этим id не найден" });
     }
 
     await db.Comment.update(
@@ -85,7 +86,7 @@ const putComment = async (req, res) => {
       { where: { id } }
     );
 
-    return res.json({ message: 'Комментарий изменен' });
+    return res.json({ message: "Комментарий изменен" });
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
@@ -95,7 +96,7 @@ const putComment = async (req, res) => {
 module.exports = {
   createComment,
   deleteComment,
-  findComments,
-  findComment,
+  findAllComments,
+  findCommentById,
   putComment,
 };
