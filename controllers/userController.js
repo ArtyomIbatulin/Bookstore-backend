@@ -41,7 +41,7 @@ const login = async (req, res) => {
   // try catch
   const user = await db.User.findOne({ where: { login } });
   if (!user) {
-    return res.status(400).json({ message: "Пользователь не найден" });
+    return res.status(404).json({ message: "Пользователь не найден" });
   }
 
   let comparePassword = await bcrypt.compare(password, user.password);
@@ -105,7 +105,7 @@ const editUser = async (req, res) => {
   try {
     const user = await db.User.findOne({ where: { id } });
     if (!user) {
-      return res.status(400).json({ message: "Пользователь не найден" });
+      return res.status(404).json({ message: "Пользователь не найден" });
     }
 
     const existingLogin = await db.User.findOne({ where: { login } });
@@ -136,7 +136,7 @@ const currentUser = async (req, res) => {
     // +include
 
     if (!user) {
-      return res.status(400).json({ message: "Пользователь не найден" });
+      return res.status(404).json({ message: "Пользователь не найден" });
     }
 
     return res.json(user);

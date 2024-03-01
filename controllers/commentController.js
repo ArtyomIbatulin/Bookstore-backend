@@ -2,6 +2,7 @@ const db = require("../models");
 
 const createComment = async (req, res) => {
   const { text, date } = req.body;
+  // Также добавлять bookId
   const userId = req.user.id;
 
   if (!text) {
@@ -24,12 +25,19 @@ const createComment = async (req, res) => {
 };
 
 const deleteComment = async (req, res) => {
+  // проверить, что не удаляет чужие комментарии
   const id = req.params.id;
 
   try {
-    const commentId = await db.Comment.findOne({ where: { id } });
-    if (!commentId) {
-      return res.json({ message: "Комментарий с этим id не найден" });
+    const comment = await db.Comment.findOne({ where: { id } });
+    if (!comment) {
+      return res
+        .status(404)
+        .json({ message: "Комментарий с этим id не найден" });
+    }
+
+    if (comment.UserId !== req.user.id) {
+      return res.status(403).json({ message: "Нет доступа" });
     }
 
     await db.Comment.destroy({ where: { id } });
@@ -42,6 +50,7 @@ const deleteComment = async (req, res) => {
 };
 
 const findAllComments = async (req, res) => {
+  // нужен ли userId ???
   try {
     const comments = await db.Comment.findAll({
       // attributes: { exclude: ['category'] },
@@ -56,13 +65,16 @@ const findAllComments = async (req, res) => {
 };
 
 const findCommentById = async (req, res) => {
+  // нужен ли userId ???
   const id = req.params.id;
 
   try {
     const commentId = await db.Comment.findOne({ where: { id } });
 
     if (!commentId) {
-      return res.json({ message: "Комментарий с этим id не найден" });
+      return res
+        .status(404)
+        .json({ message: "Комментарий с этим id не найден" });
     }
 
     const comment = await db.Comment.findOne({ where: { id } });
@@ -81,7 +93,9 @@ const putComment = async (req, res) => {
   try {
     const commentId = await db.Comment.findOne({ where: { id } });
     if (!commentId) {
-      return res.json({ message: "Комментарий с этим id не найден" });
+      return res
+        .status(404)
+        .json({ message: "Комментарий с этим id не найден" });
     }
 
     await db.Comment.update(

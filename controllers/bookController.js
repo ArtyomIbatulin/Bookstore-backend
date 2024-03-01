@@ -86,6 +86,7 @@ const createBook = async (req, res) => {
 };
 
 const deleteBook = async (req, res) => {
+  // вместе с книгой удалять ее лайки, комменты и все, что с ней связано
   const id = req.params.id;
 
   try {
