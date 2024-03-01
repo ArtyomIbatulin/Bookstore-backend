@@ -110,10 +110,8 @@ const editUser = async (req, res) => {
 
     const existingLogin = await db.User.findOne({ where: { login } });
 
-    // доработать!
-
     if (existingLogin && user.id !== id) {
-      return res.json({ message: "Такой логин уже занят" });
+      return res.status(400).json({ message: "Такой логин уже занят" });
     }
 
     await db.User.update(
