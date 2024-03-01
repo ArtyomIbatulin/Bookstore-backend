@@ -2,15 +2,21 @@ const db = require("../models");
 
 const createComment = async (req, res) => {
   const { text, date } = req.body;
+  const userId = req.user.id;
+
+  if (!text) {
+    return res.status(400).json({ message: "Введите комментарий" });
+  }
 
   try {
     const comment = await db.Comment.create({
       text,
       // автогенерация даты
-      date,
+      date: date || undefined,
+      UserId: userId,
     });
 
-    return res.json(comment);
+    return res.status(201).json(comment);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
