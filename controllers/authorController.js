@@ -78,7 +78,7 @@ const putAuthor = async (req, res) => {
 
     await db.Author.update(
       {
-        name,
+        name: name || undefined,
       },
       { where: { id } }
     );
