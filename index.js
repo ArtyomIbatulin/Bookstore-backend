@@ -8,7 +8,7 @@ require("./db");
 const routes = require("./routes");
 const PORT = process.env.PORT || 4000;
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "http://127.0.0.1:5173",
   credentials: true,
 };
 const path = require("path");
