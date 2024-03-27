@@ -7,8 +7,9 @@ const registration = async (req, res) => {
   const { login, password, role } = req.body;
 
   try {
-    console.log("Body", req.body);
-    // проверить не пустые ли поля
+    if (!login || !password) {
+      return res.status(400).json({ message: "Нужно ввести поля" });
+    }
 
     const candidate = await db.User.findOne({ where: { login } });
 
@@ -37,21 +38,29 @@ const registration = async (req, res) => {
 
 const login = async (req, res) => {
   const { login, password } = req.body;
-  // проверить наличие полей
-  // try catch
-  const user = await db.User.findOne({ where: { login } });
-  if (!user) {
-    return res.status(404).json({ message: "Пользователь не найден" });
+
+  try {
+    if (!login || !password) {
+      return res.status(400).json({ message: "Нужно ввести поля" });
+    }
+
+    const user = await db.User.findOne({ where: { login } });
+    if (!user) {
+      return res.status(404).json({ message: "Неверный логин и/или пароль" });
+    }
+
+    let comparePassword = await bcrypt.compare(password, user.password);
+
+    if (!comparePassword) {
+      return res.status(400).json({ message: "Неверный логин и/или пароль" });
+    }
+    const token = generateToken(user.id);
+
+    return res.json(token);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
   }
-
-  let comparePassword = await bcrypt.compare(password, user.password);
-
-  if (!comparePassword) {
-    return res.status(400).json({ message: "Пароль неверен" });
-  }
-  const token = generateToken(user.id);
-
-  return res.json(token);
 };
 
 const check = async (req, res) => {
