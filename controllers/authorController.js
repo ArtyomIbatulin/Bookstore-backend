@@ -21,7 +21,7 @@ const deleteAuthor = async (req, res) => {
   try {
     const authorId = await db.Author.findOne({ where: { id } });
     if (!authorId) {
-      return res.json({ message: "Автор с этим id не найден" });
+      return res.json({ error: "Автор с этим id не найден" });
     }
 
     await db.Author.destroy({ where: { id } });
@@ -54,7 +54,7 @@ const findAuthor = async (req, res) => {
     const authorId = await db.Author.findOne({ where: { id } });
 
     if (!authorId) {
-      return res.json({ message: "Автор с этим id не найден" });
+      return res.json({ error: "Автор с этим id не найден" });
     }
 
     const author = await db.Author.findOne({ where: { id } });
@@ -73,7 +73,7 @@ const putAuthor = async (req, res) => {
   try {
     const authorId = await db.Author.findOne({ where: { id } });
     if (!authorId) {
-      return res.json({ message: "Автор с этим id не найден" });
+      return res.json({ error: "Автор с этим id не найден" });
     }
 
     await db.Author.update(

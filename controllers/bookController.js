@@ -92,7 +92,7 @@ const deleteBook = async (req, res) => {
   try {
     const bookId = await Book.findOne({ where: { id } });
     if (!bookId) {
-      return res.json({ message: "Книга с этим id не найдена" });
+      return res.json({ error: "Книга с этим id не найдена" });
     }
 
     await Book.destroy({ where: { id } });
@@ -166,7 +166,7 @@ const findBook = async (req, res) => {
     const bookId = await Book.findOne({ where: { id } });
 
     if (!bookId) {
-      return res.json({ message: "Книга с этим id не найдена" });
+      return res.json({ error: "Книга с этим id не найдена" });
     }
 
     const book = await Book.findOne({ where: { id } });
@@ -185,7 +185,7 @@ const putBook = async (req, res) => {
   try {
     const bookId = await Book.findOne({ where: { id } });
     if (!bookId) {
-      return res.json({ message: "Книга с этим id не найдена" });
+      return res.json({ error: "Книга с этим id не найдена" });
     }
 
     await Book.update(

@@ -23,7 +23,7 @@ const deleteRating = async (req, res) => {
   try {
     const ratingId = await db.Rating.findOne({ where: { id } });
     if (!ratingId) {
-      return res.json({ message: "Рейтинг с этим id не найден" });
+      return res.json({ error: "Рейтинг с этим id не найден" });
     }
 
     await db.Rating.destroy({ where: { id } });
@@ -56,7 +56,7 @@ const findRating = async (req, res) => {
     const ratingId = await db.Rating.findOne({ where: { id } });
 
     if (!ratingId) {
-      return res.json({ message: "Рейтинг с этим id не найден" });
+      return res.json({ error: "Рейтинг с этим id не найден" });
     }
 
     const rating = await db.Rating.findOne({ where: { id } });
@@ -75,7 +75,7 @@ const putRating = async (req, res) => {
   try {
     const ratingId = await db.Rating.findOne({ where: { id } });
     if (!ratingId) {
-      return res.json({ message: "Рейтинг с этим id не найден" });
+      return res.json({ error: "Рейтинг с этим id не найден" });
     }
 
     await db.Rating.update(

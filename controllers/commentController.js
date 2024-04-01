@@ -6,7 +6,7 @@ const createComment = async (req, res) => {
   const userId = req.user.id;
 
   if (!text) {
-    return res.status(400).json({ message: "Введите комментарий" });
+    return res.status(400).json({ error: "Введите комментарий" });
   }
 
   try {
@@ -31,13 +31,11 @@ const deleteComment = async (req, res) => {
   try {
     const comment = await db.Comment.findOne({ where: { id } });
     if (!comment) {
-      return res
-        .status(404)
-        .json({ message: "Комментарий с этим id не найден" });
+      return res.status(404).json({ error: "Комментарий с этим id не найден" });
     }
 
     if (comment.UserId !== req.user.id) {
-      return res.status(403).json({ message: "Нет доступа" });
+      return res.status(403).json({ error: "Нет доступа" });
     }
 
     await db.Comment.destroy({ where: { id } });
@@ -72,9 +70,7 @@ const findCommentById = async (req, res) => {
     const commentId = await db.Comment.findOne({ where: { id } });
 
     if (!commentId) {
-      return res
-        .status(404)
-        .json({ message: "Комментарий с этим id не найден" });
+      return res.status(404).json({ error: "Комментарий с этим id не найден" });
     }
 
     const comment = await db.Comment.findOne({ where: { id } });
@@ -93,9 +89,7 @@ const putComment = async (req, res) => {
   try {
     const commentId = await db.Comment.findOne({ where: { id } });
     if (!commentId) {
-      return res
-        .status(404)
-        .json({ message: "Комментарий с этим id не найден" });
+      return res.status(404).json({ error: "Комментарий с этим id не найден" });
     }
 
     await db.Comment.update(

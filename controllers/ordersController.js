@@ -24,7 +24,7 @@ const deleteOrder = async (req, res) => {
   try {
     const orderId = await db.Orders.findOne({ where: { id } });
     if (!orderId) {
-      return res.json({ message: "Покупка с этим id не найдена" });
+      return res.json({ error: "Покупка с этим id не найдена" });
     }
 
     await db.Orders.destroy({ where: { id } });
@@ -57,7 +57,7 @@ const findOrder = async (req, res) => {
     const orderId = await db.Orders.findOne({ where: { id } });
 
     if (!orderId) {
-      return res.json({ message: "Покупка с этим id не найдена" });
+      return res.json({ error: "Покупка с этим id не найдена" });
     }
 
     const order = await db.Orders.findOne({ where: { id } });
@@ -76,7 +76,7 @@ const putOrder = async (req, res) => {
   try {
     const orderId = await db.Orders.findOne({ where: { id } });
     if (!orderId) {
-      return res.json({ message: "Покупка с этим id не найдена" });
+      return res.json({ error: "Покупка с этим id не найдена" });
     }
 
     await db.Orders.update(

@@ -8,14 +8,14 @@ const likeBook = async (req, res) => {
 
   try {
     if (!bookId) {
-      return res.status(400).json({ message: "Нет bookId" });
+      return res.status(400).json({ error: "Нет bookId" });
     }
     const existingLike = await db.Wihslist.findOne({
       where: { bookId, userId },
     });
 
     if (existingLike) {
-      return res.status(400).json({ message: "Уже стоит лайк" });
+      return res.status(400).json({ error: "Уже стоит лайк" });
     }
 
     const like = await db.Wihslist.create({
@@ -27,7 +27,7 @@ const likeBook = async (req, res) => {
   } catch (error) {
     console.log(error);
 
-    return res.status(500).json({ message: "error" });
+    return res.status(500).json({ error: "error" });
   }
 };
 
@@ -36,7 +36,7 @@ const unlikeBook = async (req, res) => {
   const userId = req.user.id;
 
   if (!id) {
-    return res.status(400).json({ message: "Уже есть дизлайк" });
+    return res.status(400).json({ error: "Уже есть дизлайк" });
   }
 
   try {
@@ -45,7 +45,7 @@ const unlikeBook = async (req, res) => {
     });
 
     if (!existingLike) {
-      return res.status(400).json({ message: "Лайка нет" });
+      return res.status(400).json({ error: "Лайка нет" });
     }
 
     const like = await db.Wihslist.delete({

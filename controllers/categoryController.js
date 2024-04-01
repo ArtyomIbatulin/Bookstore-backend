@@ -22,7 +22,7 @@ const changeCategory = async (req, res) => {
   try {
     const genreId = await db.Category.findOne({ where: { id } });
     if (!genreId) {
-      return res.json({ message: "Категория с этим id не найдена" });
+      return res.json({ error: "Категория с этим id не найдена" });
     }
 
     await db.Category.update(
@@ -45,7 +45,7 @@ const deleteCategory = async (req, res) => {
   try {
     const genreId = await db.Category.findOne({ where: { id } });
     if (!genreId) {
-      return res.json({ message: "Категория с этим id не найдена" });
+      return res.json({ error: "Категория с этим id не найдена" });
     }
 
     await db.Category.destroy({ where: { id } });
@@ -82,7 +82,7 @@ const findOneCategory = async (req, res) => {
     });
 
     if (!categoryId) {
-      return res.json({ message: "Категория с этим id не найдена" });
+      return res.json({ error: "Категория с этим id не найдена" });
     }
 
     const category = await db.Category.findOne({
