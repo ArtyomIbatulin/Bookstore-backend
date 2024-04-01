@@ -8,13 +8,13 @@ const registration = async (req, res) => {
 
   try {
     if (!login || !password) {
-      return res.status(400).json({ message: "Нужно ввести поля" });
+      return res.status(400).json({ error: "Нужно ввести поля" });
     }
 
     const candidate = await db.User.findOne({ where: { login } });
 
     if (candidate) {
-      return res.status(400).json({ message: "Такой логин уже существует" });
+      return res.status(400).json({ error: "Такой логин уже существует" });
     }
 
     const hashPassword = await bcrypt.hash(password, 5);
@@ -41,22 +41,25 @@ const login = async (req, res) => {
 
   try {
     if (!login || !password) {
-      return res.status(400).json({ message: "Нужно ввести поля" });
+      return res.status(400).json({ error: "Нужно ввести поля" });
     }
 
     const user = await db.User.findOne({ where: { login } });
     if (!user) {
-      return res.status(404).json({ message: "Неверный логин и/или пароль" });
+      return res.status(404).json({ error: "Неверный логин и/или пароль" });
     }
+
+    // token, utils token & error/message 2:02
+    // userSlice types
 
     let comparePassword = await bcrypt.compare(password, user.password);
 
     if (!comparePassword) {
-      return res.status(400).json({ message: "Неверный логин и/или пароль" });
+      return res.status(400).json({ error: "Неверный логин и/или пароль" });
     }
     const token = generateToken(user.id);
 
-    return res.json(token);
+    return res.json({ token });
   } catch (error) {
     console.log(error);
     return res.status(500).json(error);
@@ -97,7 +100,7 @@ const getUserById = async (req, res) => {
     });
 
     if (!user) {
-      return res.status(404).json({ message: "Пользователь не найден" });
+      return res.status(404).json({ error: "Пользователь не найден" });
     }
 
     return res.json(user);
@@ -114,13 +117,13 @@ const editUser = async (req, res) => {
   try {
     const user = await db.User.findOne({ where: { id } });
     if (!user) {
-      return res.status(404).json({ message: "Пользователь не найден" });
+      return res.status(404).json({ error: "Пользователь не найден" });
     }
 
     const existingLogin = await db.User.findOne({ where: { login } });
 
     if (existingLogin && user.id !== id) {
-      return res.status(400).json({ message: "Такой логин уже занят" });
+      return res.status(400).json({ error: "Такой логин уже занят" });
     }
 
     await db.User.update(
@@ -145,7 +148,7 @@ const currentUser = async (req, res) => {
     // +include
 
     if (!user) {
-      return res.status(404).json({ message: "Пользователь не найден" });
+      return res.status(404).json({ error: "Пользователь не найден" });
     }
 
     return res.json(user);
