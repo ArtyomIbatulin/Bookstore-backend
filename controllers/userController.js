@@ -27,7 +27,7 @@ const registration = async (req, res) => {
       role,
     });
 
-    const token = generateToken(user.id);
+    const token = generateToken(user.id, user.role);
 
     return res.status(201).json(user);
   } catch (error) {
@@ -57,7 +57,7 @@ const login = async (req, res) => {
     if (!comparePassword) {
       return res.status(400).json({ error: "Неверный логин и/или пароль" });
     }
-    const token = generateToken(user.id);
+    const token = generateToken(user.id, user.role);
 
     return res.json({ token });
   } catch (error) {
