@@ -65,17 +65,18 @@ const path = require("path");
 // };
 
 const createBook = async (req, res) => {
+  // сделать
   const { name, price, description } = req.body;
-  const { img } = req.files;
-  let fileName = uuid.v4() + ".jpg";
-  img.mv(path.resolve(__dirname, "..", "static", fileName));
+  // const { img } = req.files;
+  // let fileName = uuid.v4() + ".jpg";
+  // img.mv(path.resolve(__dirname, "..", "static", fileName));
 
   try {
     const book = await Book.create({
       name,
       price,
       description,
-      img: fileName,
+      // img: fileName,
     });
 
     return res.status(201).json(book);
