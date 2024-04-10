@@ -152,8 +152,8 @@ const findBooks = async (req, res) => {
         offset,
       });
     }
-
-    return res.json(books);
+    console.log(books.rows);
+    return res.json(books.rows);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
