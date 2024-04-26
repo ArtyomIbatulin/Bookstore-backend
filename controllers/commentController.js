@@ -1,16 +1,16 @@
 const db = require("../models");
 
 const createComment = async (req, res) => {
-  const { text, date } = req.body;
-  // Также добавлять bookId
+  const { text, date, bookId } = req.body;
   const userId = req.user.id;
 
-  if (!text) {
+  if (!text || !bookId) {
     return res.status(400).json({ error: "Введите комментарий" });
   }
 
   try {
     const comment = await db.Comment.create({
+      BookId: bookId,
       text,
       // автогенерация даты
       date: date || undefined,
