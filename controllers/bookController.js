@@ -3,6 +3,7 @@ const Book = db.Book;
 const Author = db.Author;
 const Category = db.Category;
 const Rating = db.Rating;
+const Comment = db.Comment;
 // const Op = db.Sequelize.Op;
 const uuid = require("uuid");
 const path = require("path");
@@ -114,14 +115,16 @@ const findBooks = async (req, res) => {
 
   try {
     if (!AuthorId && !CategoryId) {
+      console.log("!AuthorId && !CategoryId");
       books = await Book.findAndCountAll({
-        include: [Author, Category, Rating],
+        include: [Author, Category, Rating, Comment],
         limit,
         offset,
       });
     }
 
     if (AuthorId && !CategoryId) {
+      console.log("AuthorId && !CategoryId");
       books = await Book.findAndCountAll({
         include: [{ model: Author, where: { id: AuthorId } }, Category, Rating],
         limit,
@@ -130,6 +133,7 @@ const findBooks = async (req, res) => {
     }
 
     if (!AuthorId && CategoryId) {
+      console.log("!AuthorId && CategoryId");
       books = await Book.findAndCountAll({
         include: [
           { model: Category, where: { id: CategoryId } },
@@ -142,6 +146,7 @@ const findBooks = async (req, res) => {
     }
 
     if (AuthorId && CategoryId) {
+      console.log("AuthorId && CategoryId");
       books = await Book.findAndCountAll({
         include: [
           { model: Author, where: { id: AuthorId } },
@@ -169,7 +174,10 @@ const findBook = async (req, res) => {
       return res.json({ error: "Книга с этим id не найдена" });
     }
 
-    const book = await Book.findOne({ where: { id } });
+    const book = await Book.findOne({
+      where: { id },
+      include: [Author, Category, Rating, Comment],
+    });
 
     return res.json(book);
   } catch (error) {
