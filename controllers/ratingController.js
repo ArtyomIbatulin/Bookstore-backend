@@ -3,14 +3,21 @@ const db = require("../models");
 // переписать рейтинги
 
 const createRating = async (req, res) => {
-  const { rate } = req.body;
+  const { rate, bookId } = req.body;
+  const userId = req.user.id;
+
+  if (!rate || !bookId) {
+    return res.status(400).json({ error: "Введите рейтинг" });
+  }
 
   try {
     const rating = await db.Rating.create({
       rate,
+      BookId: bookId,
+      UserId: userId,
     });
 
-    return res.json(rating);
+    return res.status(201).json(rating);
   } catch (error) {
     console.log(error);
     res.status(500).json(error);

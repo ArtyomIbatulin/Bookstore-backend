@@ -63,7 +63,11 @@ router.put(
   commentController.putComment
 );
 
-router.post("/api/v1/create-rating", ratingController.createRating);
+router.post(
+  "/api/v1/create-rating",
+  authMiddleware,
+  ratingController.createRating
+);
 router.get("/api/v1/get-ratings", ratingController.findRatings);
 router.get("/api/v1/find-rating/:id", ratingController.findRating);
 router.delete("/api/v1/find-rating/:id", ratingController.deleteRating);
