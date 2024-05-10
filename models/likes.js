@@ -1,7 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Orders extends Model {
+  class Likes extends Model {
     static associate({ Book, User }) {
       this.belongsToMany(Book, {
         through: "Orders_books",
@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(User);
     }
   }
-  Orders.init(
+  Likes.init(
     {
       amount: {
         type: DataTypes.INTEGER,
@@ -20,8 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "Orders",
+      modelName: "Likes",
     }
   );
-  return Orders;
+  return Likes;
 };

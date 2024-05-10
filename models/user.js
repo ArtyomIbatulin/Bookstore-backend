@@ -2,33 +2,38 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate({ Comment, Rating, Orders }) {
+    static associate({ Comment, Rating, Orders, Likes }) {
       this.hasMany(Comment);
       this.belongsToMany(Rating, {
         through: "User_ratings",
       });
       this.hasOne(Orders);
+      this.hasOne(Likes);
     }
   }
   User.init(
     {
       login: {
         type: DataTypes.STRING,
-        // allowNull: false,
-        // validate: { unique: true, len: [2, 16] },
       },
       password: {
         type: DataTypes.STRING,
-        // allowNull: false,
       },
       role: {
         type: DataTypes.ENUM("admin", "user"),
         defaultValue: "user",
+      },
+      name: {
+        type: DataTypes.STRING,
+      },
+      avatarUrl: {
+        type: DataTypes.STRING,
+      },
+      dateOfBirth: {
+        type: DataTypes.DATE,
+      },
+      location: {
+        type: DataTypes.STRING,
       },
     },
     {
@@ -38,5 +43,3 @@ module.exports = (sequelize, DataTypes) => {
   );
   return User;
 };
-
-// name, avatar, date of birth, location ?
