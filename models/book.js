@@ -22,14 +22,9 @@ module.exports = (sequelize, DataTypes) => {
     {
       name: {
         type: DataTypes.STRING,
-        // allowNull: false,
       },
       price: {
         type: DataTypes.INTEGER,
-        // allowNull: false,
-        // validate: {
-        //   isNumeric: true,
-        // },
       },
       description: {
         type: DataTypes.STRING,
