@@ -11,16 +11,34 @@ module.exports = {
 
       login: {
         type: Sequelize.STRING,
-        // allowNull: false,
-        // validate: { unique: true, len: [2, 16] },
+        allowNull: false,
+        validate: { unique: true, len: [2, 16] },
       },
       password: {
         type: Sequelize.STRING,
-        // allowNull: false,
+        allowNull: false,
       },
       role: {
         type: Sequelize.ENUM("admin", "user"),
         defaultValue: "user",
+      },
+
+      name: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+
+      avatarUrl: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      dateOfBirth: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
+      location: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
 
       createdAt: {

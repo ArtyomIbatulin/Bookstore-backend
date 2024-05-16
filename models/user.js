@@ -15,9 +15,12 @@ module.exports = (sequelize, DataTypes) => {
     {
       login: {
         type: DataTypes.STRING,
+        allowNull: false,
+        validate: { unique: true, len: [2, 16] },
       },
       password: {
         type: DataTypes.STRING,
+        allowNull: false,
       },
       role: {
         type: DataTypes.ENUM("admin", "user"),
@@ -25,15 +28,19 @@ module.exports = (sequelize, DataTypes) => {
       },
       name: {
         type: DataTypes.STRING,
+        allowNull: true,
       },
       avatarUrl: {
         type: DataTypes.STRING,
+        allowNull: true,
       },
       dateOfBirth: {
         type: DataTypes.DATE,
+        allowNull: true,
       },
       location: {
         type: DataTypes.STRING,
+        allowNull: true,
       },
     },
     {
