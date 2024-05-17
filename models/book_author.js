@@ -18,3 +18,5 @@ module.exports = (sequelize, DataTypes) => {
   );
   return Book_author;
 };
+
+//  modelName: "Book_authors", ????

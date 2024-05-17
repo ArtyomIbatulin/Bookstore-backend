@@ -16,3 +16,5 @@ module.exports = (sequelize, DataTypes) => {
   );
   return Book_category;
 };
+
+//  modelName: "Book_categories", ???

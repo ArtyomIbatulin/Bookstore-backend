@@ -29,6 +29,24 @@ module.exports = {
         allowNull: false,
       },
 
+      // WishlistId: {
+      //   type: Sequelize.INTEGER,
+      //   references: {
+      //     model: 'Wishlists',
+      //     key: 'id',
+      //   },
+      //   allowNull: false,
+      // },
+
+      // BasketId: {
+      //   type: Sequelize.INTEGER,
+      //   references: {
+      //     model: 'Baskets',
+      //     key: 'id',
+      //   },
+      //   allowNull: false,
+      // },
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

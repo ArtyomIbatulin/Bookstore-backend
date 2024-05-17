@@ -2,20 +2,17 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Book extends Model {
-    static associate({ Comment, Category, Author, Rating, Orders }) {
+    static associate({ Comment, Category, Author, Rating, Wishlist, Basket }) {
       this.hasMany(Comment);
+      this.belongsTo(Wishlist);
+      this.belongsTo(Basket);
       this.belongsToMany(Category, {
         through: "Book_categories",
       });
       this.belongsToMany(Author, {
         through: "Book_authors",
       });
-      this.belongsToMany(Rating, {
-        through: "Book_ratings",
-      });
-      this.belongsToMany(Orders, {
-        through: "Orders_books",
-      });
+      this.hasMany(Rating);
     }
   }
   Book.init(
