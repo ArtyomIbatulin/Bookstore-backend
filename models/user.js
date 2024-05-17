@@ -2,13 +2,13 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    static associate({ Comment, Rating, Orders, Likes }) {
+    static associate({ Comment, Rating, Orders, Wishlist }) {
       this.hasMany(Comment);
       this.belongsToMany(Rating, {
         through: "User_ratings",
       });
       this.hasOne(Orders);
-      this.hasOne(Likes);
+      this.hasOne(Wishlist);
     }
   }
   User.init(
