@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Comments', {
+    await queryInterface.createTable("Comments", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,31 +10,25 @@ module.exports = {
       },
       text: {
         type: Sequelize.STRING,
-        // allowNull: false,
+        allowNull: false,
       },
-      date: {
-        type: Sequelize.DATE,
-        // allowNull: false,
-        // validate: {
-        //   isDate: true,
-        // },
-      },
-      UserId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Users',
-          key: 'id',
-        },
-        // allowNull: false,
-      },
-      BookId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Books',
-          key: 'id',
-        },
-        // allowNull: false,
-      },
+
+      // UserId: {
+      //   type: Sequelize.INTEGER,
+      //   references: {
+      //     model: 'Users',
+      //     key: 'id',
+      //   },
+      //   allowNull: false,
+      // },
+      // BookId: {
+      //   type: Sequelize.INTEGER,
+      //   references: {
+      //     model: 'Books',
+      //     key: 'id',
+      //   },
+      //   allowNull: false,
+      // },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -46,6 +40,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Comments');
+    await queryInterface.dropTable("Comments");
   },
 };

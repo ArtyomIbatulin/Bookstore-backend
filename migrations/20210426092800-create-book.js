@@ -10,21 +10,23 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
-        // allowNull: false,
+        allowNull: false,
       },
       price: {
         type: Sequelize.INTEGER,
-        // allowNull: false,
-        // validate: {
-        //   isNumeric: true,
-        // },
+        allowNull: false,
+        validate: {
+          isNumeric: true,
+        },
       },
       description: {
         type: Sequelize.STRING,
+        allowNull: true,
       },
 
       img: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
 
       createdAt: {

@@ -1,27 +1,28 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Orders extends Model {
+  class Order extends Model {
     static associate({ Book, User }) {
       this.belongsToMany(Book, {
-        through: "Orders_books",
+        through: "Order_book",
       });
       this.belongsTo(User);
     }
   }
-  Orders.init(
+  Order.init(
     {
       amount: {
         type: DataTypes.INTEGER,
-      },
-      status: {
-        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          isNumeric: true,
+        },
       },
     },
     {
       sequelize,
-      modelName: "Orders",
+      modelName: "Order",
     }
   );
-  return Orders;
+  return Order;
 };
