@@ -8,9 +8,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      like: {
-        type: Sequelize.BOOLEAN,
-      },
+      // like: {
+      //   type: Sequelize.BOOLEAN,
+      // },
       // UserId: {
       //   type: Sequelize.INTEGER,
       //   references: {

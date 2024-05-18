@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Wishlist.init(
     {
-      like: DataTypes.BOOLEAN,
+      // like: DataTypes.BOOLEAN,
     },
     {
       sequelize,
