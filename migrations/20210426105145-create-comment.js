@@ -13,22 +13,22 @@ module.exports = {
         allowNull: false,
       },
 
-      // UserId: {
-      //   type: Sequelize.INTEGER,
-      //   references: {
-      //     model: 'Users',
-      //     key: 'id',
-      //   },
-      //   allowNull: false,
-      // },
-      // BookId: {
-      //   type: Sequelize.INTEGER,
-      //   references: {
-      //     model: 'Books',
-      //     key: 'id',
-      //   },
-      //   allowNull: false,
-      // },
+      UserId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Users",
+          key: "id",
+        },
+        allowNull: false,
+      },
+      BookId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Books",
+          key: "id",
+        },
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
