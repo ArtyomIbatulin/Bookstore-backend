@@ -38,3 +38,5 @@ module.exports = {
     await queryInterface.dropTable("Book_categories");
   },
 };
+
+// need to create new many-to-many
