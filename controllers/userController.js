@@ -167,8 +167,3 @@ module.exports = {
   editUser,
   currentUser,
 };
-
-// register, login, getUserById, updateUser, current
-// ulby, sequelize
-// include сделать работающим !!!
-// check ???
