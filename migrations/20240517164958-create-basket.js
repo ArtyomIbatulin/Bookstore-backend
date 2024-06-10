@@ -8,10 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      amount: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
+      // seq ставит автоматически?
       // UserId: {
       //   type: Sequelize.INTEGER,
       //   references: {

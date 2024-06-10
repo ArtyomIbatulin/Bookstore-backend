@@ -11,6 +11,7 @@ module.exports = {
       // like: {
       //   type: Sequelize.BOOLEAN,
       // },
+      // seq ставит автоматически?
       // UserId: {
       //   type: Sequelize.INTEGER,
       //   references: {

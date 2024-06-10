@@ -13,6 +13,7 @@ module.exports = {
         allowNull: false,
       },
 
+      // seq ставит автоматически?
       // UserId: {
       //   type: Sequelize.INTEGER,
       //   references: {
@@ -21,6 +22,7 @@ module.exports = {
       //   },
       //   allowNull: false,
       // },
+      // seq ставит автоматически?
       // BookId: {
       //   type: Sequelize.INTEGER,
       //   references: {

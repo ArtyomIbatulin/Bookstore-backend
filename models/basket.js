@@ -8,12 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Basket.init(
-    {
-      // amount: {
-      //   type: DataTypes.INTEGER,
-      //   allowNull: false,
-      // },
-    },
+    {},
     {
       sequelize,
       modelName: "Basket",

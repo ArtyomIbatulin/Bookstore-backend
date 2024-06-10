@@ -29,6 +29,7 @@ module.exports = {
         allowNull: false,
       },
 
+      // seq ставит автоматически?
       // WishlistId: {
       //   type: Sequelize.INTEGER,
       //   references: {
@@ -38,6 +39,7 @@ module.exports = {
       //   allowNull: false,
       // },
 
+      // seq ставит автоматически?
       // BasketId: {
       //   type: Sequelize.INTEGER,
       //   references: {

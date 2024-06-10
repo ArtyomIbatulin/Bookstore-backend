@@ -8,22 +8,24 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      BookId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "Books",
-          key: "id",
-        },
-        allowNull: false,
-      },
-      CategoryId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "Categories",
-          key: "id",
-        },
-        allowNull: false,
-      },
+      // seq ставит автоматически?
+      // BookId: {
+      //   type: Sequelize.INTEGER,
+      //   references: {
+      //     model: "Books",
+      //     key: "id",
+      //   },
+      //   allowNull: false,
+      // },
+      // seq ставит автоматически?
+      // CategoryId: {
+      //   type: Sequelize.INTEGER,
+      //   references: {
+      //     model: "Categories",
+      //     key: "id",
+      //   },
+      //   allowNull: false,
+      // },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -38,5 +40,3 @@ module.exports = {
     await queryInterface.dropTable("Book_categories");
   },
 };
-
-// need to create new many-to-many
