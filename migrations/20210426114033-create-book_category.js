@@ -8,24 +8,22 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      // seq ставит автоматически?
-      // BookId: {
-      //   type: Sequelize.INTEGER,
-      //   references: {
-      //     model: "Books",
-      //     key: "id",
-      //   },
-      //   allowNull: false,
-      // },
-      // seq ставит автоматически?
-      // CategoryId: {
-      //   type: Sequelize.INTEGER,
-      //   references: {
-      //     model: "Categories",
-      //     key: "id",
-      //   },
-      //   allowNull: false,
-      // },
+      BookId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Books",
+          key: "id",
+        },
+        allowNull: false,
+      },
+      CategoryId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Categories",
+          key: "id",
+        },
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

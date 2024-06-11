@@ -29,25 +29,23 @@ module.exports = {
         allowNull: false,
       },
 
-      // seq ставит автоматически?
-      // WishlistId: {
-      //   type: Sequelize.INTEGER,
-      //   references: {
-      //     model: 'Wishlists',
-      //     key: 'id',
-      //   },
-      //   allowNull: false,
-      // },
+      WishlistId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Wishlists",
+          key: "id",
+        },
+        allowNull: false,
+      },
 
-      // seq ставит автоматически?
-      // BasketId: {
-      //   type: Sequelize.INTEGER,
-      //   references: {
-      //     model: 'Baskets',
-      //     key: 'id',
-      //   },
-      //   allowNull: false,
-      // },
+      BasketId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Baskets",
+          key: "id",
+        },
+        allowNull: false,
+      },
 
       createdAt: {
         allowNull: false,

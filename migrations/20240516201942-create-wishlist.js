@@ -11,15 +11,14 @@ module.exports = {
       // like: {
       //   type: Sequelize.BOOLEAN,
       // },
-      // seq ставит автоматически?
-      // UserId: {
-      //   type: Sequelize.INTEGER,
-      //   references: {
-      //     model: "Users",
-      //     key: "id",
-      //   },
-      //   allowNull: false,
-      // },
+      UserId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Users",
+          key: "id",
+        },
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
