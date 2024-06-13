@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   class Book extends Model {
     static associate({ Comment, Category, Author, Rating, Wishlist, Basket }) {
       this.hasMany(Comment);
+      this.hasMany(Rating);
       this.belongsTo(Wishlist);
       this.belongsTo(Basket);
       this.belongsToMany(Category, {
@@ -12,7 +13,6 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsToMany(Author, {
         through: "Book_authors",
       });
-      this.hasMany(Rating);
     }
   }
   Book.init(
@@ -44,3 +44,5 @@ module.exports = (sequelize, DataTypes) => {
   );
   return Book;
 };
+
+// npx sequelize-cli db:migrate
