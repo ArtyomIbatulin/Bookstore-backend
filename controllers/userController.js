@@ -27,6 +27,9 @@ const registration = async (req, res) => {
       role,
     });
 
+    const basket = await db.Basket.create({ UserId: user.id });
+    const wishlist = await db.Wishlist.create({ UserId: user.id });
+
     const token = generateToken(user.id, user.role);
 
     return res.status(201).json(user);
