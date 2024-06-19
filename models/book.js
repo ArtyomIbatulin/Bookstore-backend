@@ -44,5 +44,4 @@ module.exports = (sequelize, DataTypes) => {
   );
   return Book;
 };
-
 // npx sequelize-cli db:migrate

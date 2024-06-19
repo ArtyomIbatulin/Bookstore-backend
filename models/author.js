@@ -10,9 +10,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Author.init(
     {
-      name: {
-        type: DataTypes.STRING,
-      },
+      name: DataTypes.STRING,
     },
     {
       sequelize,
