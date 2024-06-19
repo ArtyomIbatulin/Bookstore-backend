@@ -70,8 +70,8 @@ const login = async (req, res) => {
 };
 
 const check = async (req, res) => {
-  const token = generateToken(req.user.id);
-  return res.json(token);
+  const token = generateToken(req.user.id, req.user.role);
+  return res.json({ token });
 };
 
 const getUsers = async (req, res) => {
