@@ -12,7 +12,6 @@ module.exports = {
       login: {
         type: Sequelize.STRING,
         allowNull: false,
-        validate: { unique: true, len: [2, 16] },
       },
       password: {
         type: Sequelize.STRING,
