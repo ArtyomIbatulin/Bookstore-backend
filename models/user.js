@@ -5,7 +5,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate({ Comment, Rating, Basket, Wishlist }) {
       this.hasMany(Comment);
       this.hasMany(Rating);
-      this.hasOne(Basket);
+      this.hasOne(Basket, {
+        onDelete: "CASCADE ",
+      });
       this.hasOne(Wishlist);
     }
   }
@@ -47,3 +49,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   return User;
 };
+
+// login - validate, constraint, not
+// delete cascade
+// validate: { unique: true, len: [2, 16] },

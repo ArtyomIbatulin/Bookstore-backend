@@ -4,7 +4,9 @@ module.exports = (sequelize, DataTypes) => {
   class Basket extends Model {
     static associate({ Book, User }) {
       this.hasMany(Book);
-      this.belongsTo(User);
+      this.belongsTo(User, {
+        onDelete: "CASCADE",
+      });
     }
   }
   Basket.init(
