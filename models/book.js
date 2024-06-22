@@ -45,3 +45,10 @@ module.exports = (sequelize, DataTypes) => {
   return Book;
 };
 // npx sequelize-cli db:migrate
+
+/* 
+Books.hasMany(Comments, {
+  foreignKey: 'BookId',
+  onDelete: 'CASCADE' // Включение каскадного удаления
+});
+*/

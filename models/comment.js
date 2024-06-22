@@ -21,3 +21,10 @@ module.exports = (sequelize, DataTypes) => {
   );
   return Comment;
 };
+
+/* 
+Comments.belongsTo(Books, {
+  foreignKey: 'BookId',
+  onDelete: 'CASCADE'
+});
+*/
