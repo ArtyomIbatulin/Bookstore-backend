@@ -5,9 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate({ Comment, Rating, Basket, Wishlist }) {
       this.hasMany(Comment);
       this.hasMany(Rating);
-      this.hasOne(Basket, {
-        onDelete: "CASCADE ",
-      });
+      this.hasOne(Basket);
       this.hasOne(Wishlist);
     }
   }
@@ -53,3 +51,7 @@ module.exports = (sequelize, DataTypes) => {
 // login - validate, constraint, not
 // delete cascade
 // validate: { unique: true, len: [2, 16] },
+
+// User.beforeDestroy(async user => {
+// await Role.destroy({ where: { userId: user.id } })
+// })
