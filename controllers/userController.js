@@ -85,14 +85,7 @@ const check = async (req, res) => {
 const getUsers = async (req, res) => {
   try {
     const users = await db.User.findAll({
-      include: [
-        {
-          model: db.Comment,
-          model: db.Rating,
-          model: db.Orders,
-          //  { model: Category, where: { id: CategoryId } },
-        },
-      ],
+      include: [db.Comment, db.Rating, db.Basket, db.Wishlist],
     });
 
     return res.json(users);
