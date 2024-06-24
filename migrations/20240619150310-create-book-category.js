@@ -8,21 +8,23 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      BookId: {
+      bookId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+        primaryKey: true,
         references: {
           model: "Books",
           key: "id",
         },
-        allowNull: false,
       },
-      CategoryId: {
+      categoryId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+        primaryKey: true,
         references: {
           model: "Categories",
           key: "id",
         },
-        allowNull: false,
       },
       createdAt: {
         allowNull: false,
