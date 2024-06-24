@@ -17,7 +17,7 @@ module.exports = {
           max: 5,
         },
       },
-      UserId: {
+      userId: {
         type: Sequelize.INTEGER,
         references: {
           model: "Users",
@@ -25,7 +25,7 @@ module.exports = {
         },
         allowNull: false,
       },
-      BookId: {
+      bookId: {
         type: Sequelize.INTEGER,
         references: {
           model: "Books",
