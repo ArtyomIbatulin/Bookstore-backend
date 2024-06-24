@@ -3,13 +3,22 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate({ Comment, Rating, Basket, Wishlist }) {
-      this.hasMany(Comment);
-      this.hasMany(Rating);
+      this.hasMany(Comment, {
+        foreignKey: "userId",
+        onDelete: "CASCADE",
+      });
+      this.hasMany(Rating, {
+        foreignKey: "userId",
+        onDelete: "CASCADE",
+      });
       this.hasOne(Basket, {
         foreignKey: "userId",
         onDelete: "CASCADE",
       });
-      this.hasOne(Wishlist);
+      this.hasOne(Wishlist, {
+        foreignKey: "userId",
+        onDelete: "CASCADE",
+      });
     }
   }
   User.init(
