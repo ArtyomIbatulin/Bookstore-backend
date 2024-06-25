@@ -29,22 +29,24 @@ module.exports = {
         allowNull: false,
       },
 
-      WishlistId: {
+      wishlistId: {
         type: Sequelize.INTEGER,
         references: {
           model: "Wishlists",
           key: "id",
         },
         allowNull: false,
+        // unique: true,
       },
 
-      BasketId: {
+      basketId: {
         type: Sequelize.INTEGER,
         references: {
           model: "Baskets",
           key: "id",
         },
         allowNull: false,
+        primaryKey: true,
       },
       createdAt: {
         allowNull: false,
