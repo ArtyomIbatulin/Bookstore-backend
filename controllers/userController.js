@@ -35,8 +35,8 @@ const registration = async (req, res) => {
       avatarUrl: `/uploads/${avatarPath}`,
     });
 
-    const basket = await db.Basket.create({ UserId: user.id });
-    const wishlist = await db.Wishlist.create({ UserId: user.id });
+    const basket = await db.Basket.create({ userId: user.id });
+    const wishlist = await db.Wishlist.create({ userId: user.id });
 
     const token = generateToken(user.id, user.role);
 
@@ -44,6 +44,26 @@ const registration = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.status(500).json(error);
+  }
+};
+
+const deleteUser = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const userId = await db.User.findOne({ where: { id } });
+    if (!userId) {
+      return res.json({ error: "Пользователь  с этим id не найден" });
+    }
+
+    await db.User.destroy({ where: { id } });
+    await db.Basket.destroy({ where: { id } });
+    await db.Wishlist.destroy({ where: { id } });
+
+    return res.json({ message: "Пользователь успешно удален" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
   }
 };
 
@@ -170,4 +190,5 @@ module.exports = {
   getUserById,
   editUser,
   currentUser,
+  deleteUser,
 };
