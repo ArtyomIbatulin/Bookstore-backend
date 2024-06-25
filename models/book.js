@@ -3,10 +3,22 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Book extends Model {
     static associate({ Comment, Category, Author, Rating, Wishlist, Basket }) {
-      this.hasMany(Comment);
-      this.hasMany(Rating);
-      this.belongsTo(Wishlist);
-      this.belongsTo(Basket);
+      this.hasMany(Comment, {
+        foreignKey: "bookId",
+        onDelete: "CASCADE",
+      });
+      this.hasMany(Rating, {
+        foreignKey: "bookId",
+        onDelete: "CASCADE",
+      });
+      this.belongsTo(Wishlist, {
+        foreignKey: "wishlistId",
+        onDelete: "CASCADE",
+      });
+      this.belongsTo(Basket, {
+        foreignKey: "basketId",
+        onDelete: "CASCADE",
+      });
       this.belongsToMany(Category, {
         through: "Book_categories",
       });
@@ -36,6 +48,16 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      // Убираем `primaryKey: true` из wishlistId
+      wishlistId: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: "Wishlists",
+          key: "id",
+        },
+        allowNull: false,
+        unique: true,
+      },
     },
     {
       sequelize,
@@ -48,7 +70,7 @@ module.exports = (sequelize, DataTypes) => {
 
 /* 
 Books.hasMany(Comments, {
-  foreignKey: 'BookId',
+  foreignKey: 'bookId',
   onDelete: 'CASCADE' // Включение каскадного удаления
 });
 */
