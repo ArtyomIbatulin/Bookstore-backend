@@ -5,16 +5,19 @@ module.exports = {
       id: {
         allowNull: false,
         autoIncrement: true,
-        primaryKey: true,
+        // primaryKey: true,
         type: Sequelize.INTEGER,
+        // unique: true,
       },
-      UserId: {
+      userId: {
         type: Sequelize.INTEGER,
         references: {
           model: "Users",
           key: "id",
         },
         allowNull: false,
+        primaryKey: true,
+        unique: true, // для one-to-one
       },
       createdAt: {
         allowNull: false,
