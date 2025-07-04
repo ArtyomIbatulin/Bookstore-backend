@@ -56,9 +56,10 @@ const deleteUser = async (req, res) => {
       return res.json({ error: "Пользователь  с этим id не найден" });
     }
 
+    // Если не хотят удаляться, попробовать soft delete
     await db.User.destroy({ where: { id } });
-    await db.Basket.destroy({ where: { id } });
-    await db.Wishlist.destroy({ where: { id } });
+    // await db.Basket.destroy({ where: { id } });
+    // await db.Wishlist.destroy({ where: { id } });
 
     return res.json({ message: "Пользователь успешно удален" });
   } catch (error) {

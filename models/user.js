@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: "CASCADE",
       });
       this.hasOne(Basket, {
+        as: "basket",
         foreignKey: "userId",
         onDelete: "CASCADE",
       });

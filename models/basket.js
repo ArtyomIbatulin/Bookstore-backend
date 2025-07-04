@@ -8,8 +8,9 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: "CASCADE",
       });
       this.belongsTo(User, {
-        foreignKey: "userId",
         onDelete: "CASCADE",
+        foreignKey: "userId",
+        allowNull: false,
       });
     }
   }
