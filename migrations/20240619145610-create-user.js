@@ -7,7 +7,7 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
-        unique: true, // для one-to-one
+        // unique: true, // для one-to-one
       },
 
       login: {
