@@ -7,19 +7,19 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "userId",
         onDelete: "CASCADE",
       });
-      this.hasMany(Rating, {
-        foreignKey: "userId",
-        onDelete: "CASCADE",
-      });
-      this.hasOne(Basket, {
-        as: "basket",
-        foreignKey: "userId",
-        onDelete: "CASCADE",
-      });
-      this.hasOne(Wishlist, {
-        foreignKey: "userId",
-        onDelete: "CASCADE",
-      });
+      // this.hasMany(Rating, {
+      //   foreignKey: "userId",
+      //   onDelete: "CASCADE",
+      // });
+      // this.hasOne(Basket, {
+      //   as: "basket",
+      //   foreignKey: "userId",
+      //   onDelete: "CASCADE",
+      // });
+      // this.hasOne(Wishlist, {
+      //   foreignKey: "userId",
+      //   onDelete: "CASCADE",
+      // });
     }
   }
   User.init(
