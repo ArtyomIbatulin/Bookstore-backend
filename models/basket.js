@@ -12,11 +12,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "userId",
         allowNull: false,
       });
-      //   this.belongsTo(User, {
-      //   onDelete: "CASCADE",
-      //   foreignKey: "userId",
-      //   allowNull: false,
-      // });
+      this.belongsTo(User, {
+        onDelete: "CASCADE",
+        foreignKey: "userId",
+        allowNull: false,
+      });
     }
   }
   Basket.init(
