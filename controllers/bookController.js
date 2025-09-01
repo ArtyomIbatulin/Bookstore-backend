@@ -87,24 +87,25 @@ const createBook = async (req, res) => {
   }
 };
 
-const deleteBook = async (req, res) => {
-  // вместе с книгой удалять ее лайки, комменты и все, что с ней связано
-  const id = req.params.id;
+// return
+// const deleteBook = async (req, res) => {
+//   // вместе с книгой удалять ее лайки, комменты и все, что с ней связано
+//   const id = req.params.id;
 
-  try {
-    const bookId = await Book.findOne({ where: { id } });
-    if (!bookId) {
-      return res.json({ error: "Книга с этим id не найдена" });
-    }
+//   try {
+//     const bookId = await Book.findOne({ where: { id } });
+//     if (!bookId) {
+//       return res.json({ error: "Книга с этим id не найдена" });
+//     }
 
-    await Book.destroy({ where: { id } });
+//     await Book.destroy({ where: { id } });
 
-    return res.json({ message: "Книга успешно удалена" });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json(error);
-  }
-};
+//     return res.json({ message: "Книга успешно удалена" });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json(error);
+//   }
+// };
 
 const findBooks = async (req, res) => {
   let { AuthorId, CategoryId, page, limit } = req.query;
